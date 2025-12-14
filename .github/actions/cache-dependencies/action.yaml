@@ -1,5 +1,11 @@
 name: 'Get & Cache Dependencies'
 description: 'Get the dependencies (via npm) and cache them.'
+# using inputs field is optional
+inputs:
+  caching:
+    description: 'Whether to enable caching for dependencies installation or not.'
+    required: false
+    default: 'true'
 runs:
   using: 'composite'
   steps:
@@ -13,6 +19,6 @@ runs:
         key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
     - name: Install dependencies
       # make sure if any step in the action file includes run command then mentioning the shell type is compulsory
-      if: steps.cache.outputs.cache-hit != 'true'
+      if: steps.cache.outputs.cache-hit != 'true' || inputs.caching != 'true' # means we wanna install if caching input is set to false
       run: npm ci
       shell: bash
