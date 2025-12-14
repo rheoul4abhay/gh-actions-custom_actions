@@ -1,0 +1,18 @@
+name: 'Get & Cache Dependencies'
+description: 'Get the dependencies (via npm) and cache them.'
+runs:
+  using: 'composite'
+  steps:
+      # if we make the custom actions inside the same repo and not in the separate repo then we have to use actions/checkout in the job itself and cant include it in the action 
+      #while if the action is defined in another standalone repo then we can include checkout step there itself and then we can skip that step in our project repo's workflow job steps
+    - name: Cache dependencies
+      id: cache
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+    - name: Install dependencies
+      # make sure if any step in the action file includes run command then mentioning the shell type is compulsory
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm ci
+      shell: bash
