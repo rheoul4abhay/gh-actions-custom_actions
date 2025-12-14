@@ -66,3 +66,10 @@ jobs:
         run: ls
       - name: Deploy site
         run: echo "Deploying..."
+  information:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Run custom javascript action
+        uses: ./.github/actions/deploy-build-artifact-to-s3
