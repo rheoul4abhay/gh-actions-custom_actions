@@ -26,10 +26,6 @@ jobs:
       - name: Load and cache dependencies
         id: cache-deps
         uses: ./.github/actions/cache-dependencies
-        with:
-          caching: 'true'
-      - name: Output information
-        run: echo "Cache used? ${{ steps.cache-deps.outputs.used-cache }}"
       - name: Test code
         id: run-tests
         run: npm run test
@@ -48,10 +44,6 @@ jobs:
       - name: Load and cache dependencies
         id: cache-deps        
         uses: ./.github/actions/cache-dependencies
-        with:
-          caching: 'true'
-      - name: Output information
-        run: echo "Cache used? ${{ steps.cache-deps.outputs.used-cache }}"
       - name: Build website
         run: npm run build
       - name: Upload artifacts
