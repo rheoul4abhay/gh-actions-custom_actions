@@ -11,6 +11,9 @@ inputs:
   dist-folder: # path to the folder that should be uploaded to the bucket
     description: 'The folder containing the build artifacts to deploy'
     required: true
+outputs:
+  website-url:
+    description: 'The URL of the deployed website'
 runs:
   using: 'node16' # this tell github actions that it is a custom javascript action because we are using the javascript runtime which is nodeJS runtime
   main: 'main.js' # this is the entry point of the action
