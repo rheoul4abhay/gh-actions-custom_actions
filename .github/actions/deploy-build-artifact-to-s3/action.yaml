@@ -1,0 +1,5 @@
+name: 'Deploy build artifact to AWS S3'
+description: 'Deploy a static website via AWS S3'
+runs:
+  using: 'node16' # this tell github actions that it is a custom javascript action because we are using the javascript runtime which is nodeJS runtime
+  main: 'main.js' # this is the entry point of the action
